@@ -4,23 +4,14 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import { Pool } from "pg";
 import { initRedis } from "../common/redis.mjs"
+import { initPg } from "../common/pg.mjs"
 import { createClient } from "redis";
 
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const pgClient = new Pool({
-    user: keys.pgUser,
-    host: keys.pgHost,
-    database: keys.pgDb,
-    password: keys.pgPass,
-    port: keys.pgPort,
-    ssl:
-      process.env.NODE_ENV !== 'production'
-        ? false
-        : { rejectUnauthorized: false },
-});
+const pgClient = initPg(keys, Pool)
 
 pgClient.on("connect", (client) => {
 client
