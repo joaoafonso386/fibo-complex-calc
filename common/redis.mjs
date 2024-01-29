@@ -1,8 +1,8 @@
 export const initRedis = async (keys, createClient) => {
-  let client
+  let redis
   
   try {
-    client = await createClient({
+    redis = await createClient({
       legacyMode: true,
       socket: {
         host: keys.redisHost,
@@ -14,7 +14,7 @@ export const initRedis = async (keys, createClient) => {
     console.error("Redis Client Error", e);
   }
 
-  return { client }
+  return { redis }
   
 };
 

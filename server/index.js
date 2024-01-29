@@ -14,20 +14,20 @@ app.use(bodyParser.json())
 const { Pool } = pg 
 const pgClient = initPg(keys, Pool)
 
-const { client } = initRedis(keys, createClient)
-const sub = client.duplicate();
+const { redis } = initRedis(keys, createClient)
+const redisPublisher = redis.duplicate();
 
 app.get("/", (req, res) => {
   res.send("hi")
 })
 
 app.get("/values/all", async (req, res) => {
-  const values = await pgClient.client('SELECT * FROM values')
+  const values = await pgClient.query('SELECT * FROM values')
   res.send(values.rows)
 })
 
 app.get("/values/current", async (req, res) => {
-  client.hgetall('values', (e, values) => {
+  redis.hgetall('values', (e, values) => {
   res.send(values)
   })
 })
@@ -38,8 +38,11 @@ app.post("/values", async (req, res) => {
     return res.send(422).send('Index to high')
   }
 
-  client.hset('values', index, 'Nothing yet!')
-  client.publish('values', index, 'Nothing yet!')
+  redis.hset('values', index, 'Nothing yet!')
+  redisPublisher.publish('insert', index)
+  pgClient.query('INSERT INTO values(number) VALUES($1)', [index])
+
+  res.send({ working: true })
 })
 
 app.listen(5000, (e) => console.log("Listening on port 5000"))
