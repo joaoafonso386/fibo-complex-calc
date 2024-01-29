@@ -1,5 +1,7 @@
 # Complex Fibonacci Calculator
 
-The goal is to have a complex architecture (using services like redis and postgres) to then manage a more complex container infrastructure.
+This is a complex implementation of a fibonacci sequence calculator.
 
-The code is not the relevant thing here.
+The goal is to use services like redis and postgres to then have a harder infrastructure to manage with docker.
+
+The code is not the relevant thing here, instead, the emphasis lies on the intricacies introduced at the infrastructure level.
