@@ -12,4 +12,10 @@ const fetchIndexes = async () => {
     });
 }
 
-export { fetchValues, fetchIndexes }
+const sendIndex = async (index) => {
+    await axios.post('/api/values', {
+        index: index,
+    });
+} 
+
+export { fetchValues, fetchIndexes, sendIndex }
