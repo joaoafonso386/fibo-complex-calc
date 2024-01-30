@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Link, Routes, Outlet } from "react-router-dom";
 import ExtraPage from "./components/ExtraPage";
