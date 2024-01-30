@@ -1,15 +1,11 @@
 import axios from "axios"
 
 const fetchValues = async () =>  {
-    const values = await axios.get('/api/values/current');
-    this.setState({ values: values.data });
-  }
+    return await axios.get('/api/values/current').data;
+}
 
 const fetchIndexes = async () => {
-    const seenIndexes = await axios.get('/api/values/all');
-    this.setState({
-        seenIndexes: seenIndexes.data,
-    });
+    return await axios.get('/api/values/all').data;
 }
 
 const sendIndex = async (index) => {

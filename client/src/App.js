@@ -1,39 +1,25 @@
-import './App.css';
-import { useState } from 'react'
-import { sendIndex } from './data/api';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Route, Link, Routes, Outlet } from "react-router-dom";
+import ExtraPage from "./components/ExtraPage";
+import Fibonacci from "./components/Fib";
 
-const App = () => {
-
-  const [values, setValues] = useState({})
-  const [index, setIndex] = useState('')
-  const [seenIndexes, setSeenIndexes] = useState([])
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await sendIndex(index)
-    setIndex('');
-  };
-
-  const renderValues = () => null
-  const renderSeenIndexes = () => null
-
+function App() {
   return (
-     <div>
-        <form onSubmit={handleSubmit}>
-          <label>Enter your index:</label>
-          <input
-            value={index}
-            onChange={(e) => setIndex(e.target.value)}
-          />
-          <button>Submit</button>
-        </form>
-
-        <h3>Indexes I have seen:</h3>
-        {renderSeenIndexes()}
-
-        <h3>Calculated Values:</h3>
-        {renderValues()}
+    <BrowserRouter>
+      <div>
+        <header className="App-header">
+          <Link to="/">Home</Link>
+          <Link to="/extrapage">Extra Page</Link>
+          <Routes>
+          <Route path="/" element={<Fibonacci />} />
+          <Route path="/extrapage" element={<ExtraPage />} />
+          </Routes>
+          </header>
       </div>
+      <Outlet />
+    </BrowserRouter>
   );
 }
 
