@@ -9,7 +9,7 @@ const fetchIndexes = async () => {
 }
 
 const sendIndex = async (index) => {
-    await axios.post('/api/values', {
+    return await axios.post('/api/values', {
         index: index,
     });
 } 

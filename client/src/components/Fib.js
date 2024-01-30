@@ -23,7 +23,8 @@ const Fibonacci = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await sendIndex(index);
+    const res = await sendIndex(index);
+    console.log(res)
     setIndex("");
   };
 

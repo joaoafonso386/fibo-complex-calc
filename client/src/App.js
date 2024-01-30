@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Fibonacci />} />
           <Route path="/extrapage" element={<ExtraPage />} />
           </Routes>
-          </header>
+        </header>
       </div>
       <Outlet />
     </BrowserRouter>
