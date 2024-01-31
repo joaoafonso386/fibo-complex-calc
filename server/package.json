@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "docker:build:dev": "docker build -f docker/Dockerfile.dev -t zigoto/fibo-server ..",
     "dev": "nodemon -w",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
