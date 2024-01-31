@@ -1,10 +1,9 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter, Route, Link, Routes, Outlet } from "react-router-dom";
 import ExtraPage from "./components/ExtraPage";
 import Fibonacci from "./components/Fib";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <div>
