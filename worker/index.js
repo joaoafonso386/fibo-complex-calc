@@ -3,16 +3,15 @@ import { fibo } from "./fibo.js";
 import { initRedis } from "../common/redis.mjs"
 import { createClient } from "redis"
 
-const { client } = await initRedis(keys, createClient)
-const sub = client.duplicate();
+const { redis, redisSub} = await initRedis(keys, createClient)
 
-sub.on("message", (_, message) => {
-  client.hset("values", message, fibo(parseInt(message)));
+redisSub.on("message", (_, message) => {
+  redis.hset("values", message, fibo(parseInt(message)));
 });
 
-sub.subscribe("insert");
+redisSub.subscribe("insert");
 
 process.on("SIGTERM", async () => {
-  await client.disconnect();
+  await redis.disconnect();
   console.log("<<<<<<<< DISCONNECTING FROM REDIS >>>>>>>>");
 });
