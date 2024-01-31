@@ -14,7 +14,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "docker:build": "docker build -f docker/Dockerfile.dev -t zigoto/fibo-client:latest .",
+    "docker:build:dev": "docker build -f docker/Dockerfile.dev -t zigoto/fibo-client:latest .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
