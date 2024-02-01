@@ -2,11 +2,8 @@ FROM node:21-alpine
 
 WORKDIR /app
 
-COPY worker/package.json ./worker/
+COPY worker/ ./worker/
 COPY common/ ./common/
 WORKDIR /app/worker
 RUN npm install
-WORKDIR /app
-COPY worker/ ./worker/
-WORKDIR /app/worker
 CMD [ "npm", "run", "dev" ]
