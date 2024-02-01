@@ -2,8 +2,8 @@ FROM node:21-alpine
 
 WORKDIR /app
 
-COPY server/package.json .
-COPY common/ ../common
+COPY server/ ./server/
+COPY common/ ./common/
+WORKDIR /app/server
 RUN npm install
-COPY server .
 CMD [ "npm", "run", "dev" ]
