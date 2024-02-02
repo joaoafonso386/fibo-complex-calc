@@ -1,7 +1,6 @@
 export const initRedis = async (keys, createClient) => {
   let redis
-  let redisPublisher
-  let redisSub
+  let redisPuSub
   try {
     redis = await createClient({
       legacyMode: true,
@@ -10,14 +9,13 @@ export const initRedis = async (keys, createClient) => {
         reconnectStrategy: () => 1000,
       },
     }).connect();
-    redisPublisher = redis.duplicate();
-    redisSub = redis.duplicate()
+    redisPuSub = redis.duplicate();
     console.log("Connected to Redis!");
   } catch (e) {
-    console.error("<<REDIS ERROR>>", e);
+    console.error("<<<<REDIS ERROR>>>>", e);
   }
 
-  return { redis, redisPublisher, redisSub }
+  return { redis, redisPuSub }
   
 };
 
