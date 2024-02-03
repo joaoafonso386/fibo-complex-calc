@@ -24,6 +24,7 @@ services:
       - PGPASS=pw
       - PGPORT=5432
   worker:
+    container_name: worker
     build:
       dockerfile: worker/docker/Dockerfile.dev
       context: ../../
@@ -33,9 +34,10 @@ services:
     environment:
       - REDIS_HOST=redis    
   client:
+    container_name: client
     build:
-      dockerfile: client/docker/Dockerfile.dev
-      context: ../../
+      dockerfile: docker/Dockerfile.dev
+      context: ../../client
     volumes:
       - /app/node_modules
       - ../../client:/app
