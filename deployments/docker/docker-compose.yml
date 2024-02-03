@@ -23,3 +23,12 @@ services:
       - PGDB=postgres
       - PGPASS=pw
       - PGPORT=5432
+  worker:
+    build:
+      dockerfile: worker/docker/Dockerfile.dev
+      context: ../../
+    volumes:
+      - /app/worker/node_modules
+      - ../../worker:/app/worker
+    environment:
+      - REDIS_HOST=redis    
