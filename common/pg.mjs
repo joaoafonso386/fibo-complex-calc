@@ -1,12 +1,11 @@
-export const initPg = (keys, Pool) => {
+export const initPg = (keys, pg) => {
   let pgClient
   
   try {
-    pgClient = new Pool({
+    pgClient = new pg.Pool({
       user: keys.pgUser,
-      host: keys.pgHost,
       database: keys.pgDb,
-      password: keys.pgPass,
+      password:  keys.pgPass,
       port: keys.pgPort,
       ssl:
         process.env.NODE_ENV !== "production"

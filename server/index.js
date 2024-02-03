@@ -1,19 +1,17 @@
 import express from "express";
 import cors from "cors"
 import bodyParser from "body-parser"
+import pg from 'pg'
 import { keys } from "./keys.js";
-import pg from "pg";
-import { initRedis } from "../common/redis.mjs"
 import { initPg } from "../common/pg.mjs"
+import { initRedis } from "../common/redis.mjs"
 import { createClient } from "redis";
 
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const { Pool } = pg 
-const pgClient = initPg(keys, Pool)
-
+const { pgClient } = initPg(keys, pg)
 const { redis, redisPuSub } = initRedis(keys, createClient)
 
 app.get("/", (req, res) => {
@@ -26,9 +24,8 @@ app.get("/values/all", async (req, res) => {
 })
 
 app.get("/values/current", async (req, res) => {
-  redis.hgetall('values', (e, values) => {
+  const values = await redis.hGetAll('values')
   res.send(values)
-  })
 })
 
 app.post("/values", async (req, res) => {
@@ -37,9 +34,9 @@ app.post("/values", async (req, res) => {
     return res.send(422).send('Index to high')
   }
 
-  redis.hset('values', index, 'Nothing yet!')
-  redisPublisher.publish('insert', index)
-  pgClient.query('INSERT INTO values(number) VALUES($1)', [index])
+  await redis.hSet('values', index, 'Nothing yet!')
+  redisPuSub.publish('insert', index)
+  await pgClient.query('INSERT INTO values(number) VALUES($1)', [index])
 
   res.send({ working: true })
 })
