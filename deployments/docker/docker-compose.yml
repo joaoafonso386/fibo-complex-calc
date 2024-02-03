@@ -5,3 +5,7 @@ services:
     container_name: postgres
     environment:
       POSTGRES_PASSWORD: pw
+  redis:
+    image: redis:latest
+    container_name: redis
+    
