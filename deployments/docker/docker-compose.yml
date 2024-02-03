@@ -32,3 +32,10 @@ services:
       - ../../worker:/app/worker
     environment:
       - REDIS_HOST=redis    
+  client:
+    build:
+      dockerfile: client/docker/Dockerfile.dev
+      context: ../../
+    volumes:
+      - /app/node_modules
+      - ../../client:/app
