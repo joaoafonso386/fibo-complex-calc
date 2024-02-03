@@ -1,5 +1,12 @@
 version: '3'
 services:
+  nginx:
+    build:
+      dockerfile: ../nginx/Dockerfile.dev
+      context: ../nginx
+    restart: always
+    ports:
+      - 1080:80
   postgres:
     image: postgres:latest
     container_name: postgres
