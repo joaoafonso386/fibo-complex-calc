@@ -8,4 +8,18 @@ services:
   redis:
     image: redis:latest
     container_name: redis
-    
+  server:
+    build:
+      dockerfile: server/docker/Dockerfile.dev
+      context: ../../
+    container_name: server
+    volumes:
+      - /app/server/node_modules
+      - ../../server:/app/server
+    environment:
+      - REDIS_HOST=redis
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDB=postgres
+      - PGPASS=pw
+      - PGPORT=5432

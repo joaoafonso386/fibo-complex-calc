@@ -19,7 +19,7 @@ export const initPg = (keys, Pool) => {
           .query("CREATE TABLE IF NOT EXISTS values (number INT)")
           .catch((err) => console.error(err));
       });
-      
+    console.log("Connected to Postgres!");
   } catch (e) {
     console.error(e);
   }
