@@ -1,6 +1,8 @@
 version: '3'
 services:
   nginx:
+    container_name: nginx
+    image: zigoto/nginx
     build:
       dockerfile: ../nginx/Dockerfile.dev
       context: ../nginx
@@ -19,6 +21,7 @@ services:
     build:
       dockerfile: server/docker/Dockerfile.dev
       context: ../../
+    image: zigoto/fibo-server
     container_name: server
     volumes:
       - /app/server/node_modules
@@ -32,7 +35,8 @@ services:
       - PGPORT=5432
   worker:
     container_name: worker
-    build:
+    image: zigoto/fibo-worker
+    build: 
       dockerfile: worker/docker/Dockerfile.dev
       context: ../../
     volumes:
@@ -42,6 +46,7 @@ services:
       - REDIS_HOST=redis    
   client:
     container_name: client
+    image: zigoto/fibo-client
     build:
       dockerfile: docker/Dockerfile.dev
       context: ../../client
