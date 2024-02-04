@@ -32,7 +32,7 @@ services:
       dockerfile: server/docker/Dockerfile.dev
       context: ../../
     image: zigoto/fibo-server
-    container_name: server
+    container_name: api
     volumes:
       - /app/server/node_modules
       - ../../server:/app/server
