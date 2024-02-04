@@ -6,15 +6,15 @@ const Fibonacci = () => {
   const [index, setIndex] = useState("");
   const [seenIndexes, setSeenIndexes] = useState([]);
 
-  const valuesCall = useCallback(async () => {
-    const data = await fetchValues();
+  const valuesCall = async () => {
+    const { data } = await fetchValues();
     setValues(data);
-  }, []);
+  }
 
-  const indexesCall = useCallback(async () => {
-    const data = await fetchIndexes();
+  const indexesCall = async () => {
+    const { data } = await fetchIndexes();
     setSeenIndexes(data);
-  }, []);
+  };
 
   useEffect(() => {
     indexesCall()
