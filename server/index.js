@@ -12,7 +12,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 const { pgClient } = initPg(keys, pg)
-const { redis, redisPuSub } = initRedis(keys, createClient)
+const { redis } = await initRedis(keys, createClient)
 
 app.get("/", (req, res) => {
   res.send("hi")
@@ -35,7 +35,6 @@ app.post("/values", async (req, res) => {
   }
 
   await redis.hSet('values', index, 'Nothing yet!')
-  redisPuSub.publish('insert', index)
   await pgClient.query('INSERT INTO values(number) VALUES($1)', [index])
 
   res.send({ working: true })
