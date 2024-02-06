@@ -14,7 +14,6 @@ app.use(bodyParser.json())
 const { pgClient } = initPg(keys, pg)
 const { redis } = await initRedis(keys, createClient)
 
-
 app.get("/", (req, res) => {
   res.send("hi")
 })

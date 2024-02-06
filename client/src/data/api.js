@@ -3,7 +3,7 @@ import axios from "axios"
 
 
 const fetchValues = async () =>  {
-    return axios.get('/api/values/all');
+    return axios.get('/api/values/current');
 }
 
 const fetchIndexes = async () => {
@@ -11,7 +11,7 @@ const fetchIndexes = async () => {
 }
 
 const sendIndex = async (index) => {
-    return axios.post('/api/values/all', {
+    return axios.post('/api/values', {
         index: index,
     });
 } 
