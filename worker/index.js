@@ -6,7 +6,7 @@ import { createClient } from "redis"
 const { redis } = await initRedis(keys, createClient)
 
 redis.on("message", (_, message) => {
-  redis.hset("values", message, fibo(parseInt(message)));
+  redis.hSet("values", message, fibo(parseInt(message)));
 });
 
 redis.subscribe("insert");
