@@ -25,7 +25,6 @@ app.get("/values/all", async (req, res) => {
 
 app.get("/values/current", async (req, res) => {
   const values = await redis.hGetAll('values')
-  console.log(values)
   res.send(values)
 })
 
