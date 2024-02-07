@@ -1,7 +1,5 @@
 import axios from "axios"
 
-
-
 const fetchValues = async () =>  {
     return axios.get('/api/values/current');
 }
