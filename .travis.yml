@@ -3,14 +3,14 @@ services:
   - docker
 
 before_install: 
-  - docker build -t zigoto/fibo-client -f ./client/docker/Dockerfile.dev ./client/docker
+  - docker build -t zigoto/fibo-client -f ./client/docker/Dockerfile.dev ./client
 
 script: 
   - docker run -e CI=true zigoto/fibo-client npm test
 
 after_success: 
-  - docker build -t zigoto/fibo-client -f ./client/docker/Dockerfile ./client/docker
+  - docker build -t zigoto/fibo-client -f ./client/docker/Dockerfile ./client
   - docker build -t zigoto/fibo-nginx -f ./deployments/nginx/Dockerfile ./deployments/nginx
-  - docker build -t zigoto/fibo-server -f ./server/docker/Dockerfile ./server/docker
-  - docker build -t zigoto/fibo-worker -f ./worker/docker/Dockerfile ./worker/docker
+  - docker build -t zigoto/fibo-server -f ./server/docker/Dockerfile .
+  - docker build -t zigoto/fibo-worker -f ./worker/docker/Dockerfile .
 

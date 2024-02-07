@@ -1,0 +1,9 @@
+FROM node:21-alpine
+
+WORKDIR /app
+
+COPY ./server/ ./server/
+COPY ./common/ ./common/
+WORKDIR /app/server
+RUN npm install
+CMD [ "npm", "run", "dev" ]
