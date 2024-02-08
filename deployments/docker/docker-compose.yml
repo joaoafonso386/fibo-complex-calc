@@ -1,71 +1,29 @@
-version: '3'
+version: "3"
 services:
-  nginx:
-    depends_on:
-      - api
-      - client
-    container_name: nginx
-    image: zigoto/nginx
-    build:
-      dockerfile: ../nginx/Dockerfile.dev
-      context: ../nginx
-    restart: always
-    ports:
-      - 1080:80
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_PASSWORD: pw
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - 5432:5432
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
-  api:
-    depends_on:
-      - redis
-      - postgres
-    build:
-      dockerfile: server/docker/Dockerfile.dev
-      context: ../../
-    image: zigoto/fibo-server
-    container_name: api
-    volumes:
-      - /app/server/node_modules
-      - ../../server:/app/server
-    environment:
-      - REDIS_HOST=redis
-      - PGUSER=postgres
-      - PGHOST=postgres
-      - PGDB=postgres
-      - PGPASS=pw
-      - PGPORT=5432
-  worker:
-    depends_on:
-      - redis
-    container_name: worker
-    image: zigoto/fibo-worker
-    build: 
-      dockerfile: worker/docker/Dockerfile.dev
-      context: ../../
-    volumes:
-      - /app/worker/node_modules
-      - ../../worker:/app/worker
-    environment:
-      - REDIS_HOST=redis    
   client:
-    container_name: client
-    image: zigoto/fibo-client
-    build:
-      dockerfile: docker/Dockerfile.dev
-      context: ../../client
-    volumes:
-      - /app/node_modules
-      - ../../client:/app
+    image: "zigoto/fibo-client"
+    mem_limit: 128m
+    hostname: client
+  server:
+    image: "zigoto/fibo-server"
+    mem_limit: 128m
+    hostname: api
     environment:
-      - WDS_SOCKET_PORT=0
+      - REDIS_HOST=$REDIS_HOST
+      - PGUSER=$PGUSER
+      - PGHOST=$PGHOST
+      - PGDATABASE=$PGDATABASE
+      - PGPASSWORD=$PGPASSWORD
+      - PGPORT=$PGPORT
+  worker:
+    image: "zigoto/fibo-worker"
+    mem_limit: 128m
+    hostname: worker
+    environment:
+      - REDIS_HOST=$REDIS_HOST
+  nginx:
+    image: "zigoto/fibo-nginx"
+    mem_limit: 128m
+    hostname: nginx
+    ports:
+      - "80:80"
