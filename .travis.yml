@@ -14,7 +14,7 @@ after_success:
   - docker build -t zigoto/fibo-server -f ./server/docker/Dockerfile .
   - docker build -t zigoto/fibo-worker -f ./worker/docker/Dockerfile .
 
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | $docker login -u "$DOCKER_ID" --password-stdin
   - docker push zigoto/fibo-client
   - docker push zigoto/fibo-nginx
   - docker push zigoto/fibo-server
