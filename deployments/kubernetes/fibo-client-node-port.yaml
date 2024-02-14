@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: fibo-client-node-port
 spec:
+  type: NodePort
   selector:
     component: web
   ports:
