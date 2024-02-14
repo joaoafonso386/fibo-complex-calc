@@ -8,5 +8,5 @@ spec:
   containers:
   - name: fibo-client
     image: stephengrider/multi-client
-    port:
+    ports:
       - containerPort: 3000
