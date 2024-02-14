@@ -15,6 +15,7 @@
   },
   "scripts": {
     "docker:build:dev": "docker build -f docker/Dockerfile.dev -t zigoto/fibo-client:latest .",
+    "docker:build:prod": "docker build -f docker/Dockerfile -t zigoto/fibo-client:latest .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -7,6 +7,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
+        <h1>Fib Calculator V2</h1>
         <header className="App-header">
           <Link to="/">Home</Link>
           <Link to="/extrapage">Extra Page</Link>

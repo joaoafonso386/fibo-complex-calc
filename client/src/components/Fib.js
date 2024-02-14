@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchIndexes, fetchValues, sendIndex } from "../data/api";
+import { fetchIndexes, fetchValues, sendIndex } from "../api/api";
 
 const Fibonacci = () => {
   const [values, setValues] = useState({});
