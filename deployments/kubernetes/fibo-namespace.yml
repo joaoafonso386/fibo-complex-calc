@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: fibo
   labels:
-    name: fibo
+    namespace: fibo
